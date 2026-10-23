@@ -1,0 +1,18 @@
+
+workflows:
+  ios-workflow:
+    name: Rick and Morty iOS
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+    scripts:
+      - name: Obtener dependencias
+        script: flutter pub get
+      - name: Compilar aplicación iOS
+        script: flutter build ios --release --no-codesign
+    artifacts:
+      - build/ios/iphoneos/*.app
+      - build/ios/archive/*.xcarchive
