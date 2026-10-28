@@ -1,11 +1,11 @@
-{
-    "name": "rick_and_morty_app",
-    "short_name": "rick_and_morty_app",
+﻿{
+    "name": "Rick and Morty | Multiverso",
+    "short_name": "Rick y Morty",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#12141A",
+    "theme_color": "#97CE4C",
+    "description": "Explora personajes, episodios y dimensiones del universo de Rick and Morty.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

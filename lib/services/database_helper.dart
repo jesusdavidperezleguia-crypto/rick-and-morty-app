@@ -1,12 +1,13 @@
 
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as p;
 import 'package:sqflite/sqflite.dart';
+import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
 
 class DatabaseHelper {
   DatabaseHelper._internal();
 
-  static final DatabaseHelper instance =
-      DatabaseHelper._internal();
+  static final DatabaseHelper instance = DatabaseHelper._internal();
 
   static Database? _database;
 
@@ -18,8 +19,16 @@ class DatabaseHelper {
   }
 
   Future<Database> _initDatabase() async {
-    final databasesPath = await getDatabasesPath();
-    final dbPath = p.join(databasesPath, 'rick_and_morty.db');
+    late String dbPath;
+
+    if (kIsWeb) {
+      // Inicializar SQLite para Flutter Web.
+      databaseFactory = databaseFactoryFfiWeb;
+      dbPath = 'rick_and_morty_web.db';
+    } else {
+      final databasesPath = await getDatabasesPath();
+      dbPath = p.join(databasesPath, 'rick_and_morty.db');
+    }
 
     return openDatabase(
       dbPath,
@@ -107,7 +116,6 @@ class DatabaseHelper {
 
   Future<void> removeFavorite(int characterId) async {
     final db = await database;
-
     await db.delete(
       'favorites',
       where: 'character_id = ?',
@@ -117,18 +125,13 @@ class DatabaseHelper {
 
   Future<List<Map<String, Object?>>> getFavorites() async {
     final db = await database;
-
-    return db.query(
-      'favorites',
-      orderBy: 'saved_at DESC',
-    );
+    return db.query('favorites', orderBy: 'saved_at DESC');
   }
 
   // EPISODIOS GUARDADOS
 
   Future<bool> isEpisodeSaved(int episodeId) async {
     final db = await database;
-
     final result = await db.query(
       'saved_episodes',
       where: 'episode_id = ?',
@@ -162,7 +165,6 @@ class DatabaseHelper {
 
   Future<void> removeSavedEpisode(int episodeId) async {
     final db = await database;
-
     await db.delete(
       'saved_episodes',
       where: 'episode_id = ?',
@@ -172,14 +174,10 @@ class DatabaseHelper {
 
   Future<List<Map<String, Object?>>> getSavedEpisodes() async {
     final db = await database;
-
-    return db.query(
-      'saved_episodes',
-      orderBy: 'saved_at DESC',
-    );
+    return db.query('saved_episodes', orderBy: 'saved_at DESC');
   }
 
-  // HISTORIAL DE REPRODUCCION
+  // HISTORIAL DE REPRODUCCIÓN
 
   Future<void> addWatchHistory({
     required int episodeId,
@@ -203,7 +201,6 @@ class DatabaseHelper {
     int limit = 100,
   }) async {
     final db = await database;
-
     return db.query(
       'watch_history',
       orderBy: 'watched_at DESC',
@@ -213,7 +210,6 @@ class DatabaseHelper {
 
   Future<void> deleteHistoryEntry(int historyId) async {
     final db = await database;
-
     await db.delete(
       'watch_history',
       where: 'id = ?',

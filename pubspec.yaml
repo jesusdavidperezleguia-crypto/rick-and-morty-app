@@ -1,3 +1,4 @@
+
 name: rick_and_morty_app
 description: "A new Flutter project."
 publish_to: 'none'
@@ -17,22 +18,13 @@ dependencies:
   video_player: ^2.7.2
   chewie: ^1.7.4
   sqflite: ^2.4.4+2
+  sqflite_common_ffi_web: ^1.2.0
   path: ^1.9.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
   flutter_lints: ^3.0.0
-
-
 
 flutter:
   uses-material-design: true
-
-  assets:
-    - assets/videos/temporada_1/
-    - assets/videos/temporada_2/
-    - assets/videos/temporada_3/
-    - assets/videos/temporada_4/
-    - assets/videos/temporada_5/

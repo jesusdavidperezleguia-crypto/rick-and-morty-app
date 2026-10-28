@@ -1,4 +1,5 @@
-# Miscellaneous
+
+# Archivos generales y temporales
 *.class
 *.log
 *.pyc
@@ -7,50 +8,59 @@
 .atom/
 .build/
 .buildlog/
-.history
+.history/
 .svn/
 .swiftpm/
 migrate_working_dir/
 
-# IntelliJ related
+# IntelliJ y Android Studio
 *.iml
 *.ipr
 *.iws
 .idea/
 
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
+# Visual Studio Code
+# Se conserva .vscode por si contiene configuraciones útiles
+# .vscode/
 
-# Flutter/Dart/Pub related
+# Flutter y Dart
 **/doc/api/
 **/ios/Flutter/.last_build_id
 .dart_tool/
+.flutter-plugins
 .flutter-plugins-dependencies
 .pub-cache/
 .pub/
 /build/
-/coverage/
+**/build/
+coverage/
+.flutter-automation/
 
-# Symbolication related
+# Archivos de depuración y compilación
 app.*.symbols
-
-# Obfuscation related
 app.*.map.json
+/android/app/debug/
+/android/app/profile/
+/android/app/release/
+/android/build/
 
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
-
-# Widget Preview related
+# Vistas previas de Flutter
 .widget_preview/
 
 # Videos locales: no subir a GitHub por ahora
 /assets/videos/
 
-/android/build/
+# Wrangler y archivos de configuración local
+.wrangler/
+
+# Copias de seguridad
 *.backup
+*.backup_*
+*.bak
 *.respaldo
 *_backup.dart
+
+# Archivos del sistema
+Thumbs.db
+desktop.ini
+
